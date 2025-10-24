@@ -7,7 +7,17 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "CareerPath - Career Guidance for 10th Class Students",
   description: "Complete career guidance platform for 10th class students. Explore streams, compare salaries, and find local colleges.",
+  keywords: ["career guidance", "10th class", "career streams", "colleges", "salary insights"],
+  authors: [{ name: "CareerPath Team" }],
+  openGraph: {
+    title: "CareerPath - Career Guidance for 10th Class Students",
+    description: "Complete career guidance platform for 10th class students. Explore streams, compare salaries, and find local colleges.",
+    type: "website",
+  },
 };
+
+// Enable static generation
+export const dynamic = 'force-static';
 
 export default function RootLayout({
   children,

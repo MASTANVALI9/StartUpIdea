@@ -3,6 +3,12 @@ import { db } from '@/db';
 import { careers } from '@/db/schema';
 import { eq, like, and, desc, asc } from 'drizzle-orm';
 
+// Cache careers data for 5 minutes
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+let cachedCareers: any[] | null = null;
+let cacheTimestamp: number = 0;
+let cacheKey: string = '';
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
@@ -16,6 +22,22 @@ export async function GET(request: NextRequest) {
     const demand = searchParams.get('demand');
     const search = searchParams.get('search');
     const sort = searchParams.get('sort') || 'salary';
+    
+    // Create cache key based on parameters
+    const currentCacheKey = `${stream || 'all'}-${demand || 'all'}-${search || 'all'}-${sort}-${limit}-${offset}`;
+    
+    const now = Date.now();
+    
+    // Return cached data if still valid and same parameters
+    if (cachedCareers && cacheKey === currentCacheKey && (now - cacheTimestamp) < CACHE_DURATION) {
+      return NextResponse.json(cachedCareers, { 
+        status: 200,
+        headers: {
+          'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',
+          'X-Cache': 'HIT'
+        }
+      });
+    }
     
     // Build query dynamically
     let query = db.select().from(careers);
@@ -51,7 +73,18 @@ export async function GET(request: NextRequest) {
     // Apply pagination
     const results = await query.limit(limit).offset(offset);
     
-    return NextResponse.json(results, { status: 200 });
+    // Update cache
+    cachedCareers = results;
+    cacheTimestamp = now;
+    cacheKey = currentCacheKey;
+    
+    return NextResponse.json(results, { 
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',
+        'X-Cache': 'MISS'
+      }
+    });
   } catch (error) {
     console.error('GET error:', error);
     return NextResponse.json(

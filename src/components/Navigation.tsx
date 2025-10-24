@@ -1,21 +1,46 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, memo } from "react"
 import { Menu, X, GraduationCap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/streams", label: "Career Streams" },
+  { href: "/salary-insights", label: "Salary Insights" },
+  { href: "/colleges", label: "Find Colleges" },
+  { href: "/contact", label: "Contact" },
+]
+
+// Memoized Nav Link Component
+const NavLink = memo(({ href, label }: { href: string; label: string }) => (
+  <Link
+    href={href}
+    className="text-sm font-medium transition-colors hover:text-primary"
+  >
+    {label}
+  </Link>
+))
+
+NavLink.displayName = 'NavLink'
+
+// Memoized Mobile Nav Link Component
+const MobileNavLink = memo(({ href, label, onClick }: { href: string; label: string; onClick: () => void }) => (
+  <Link
+    href={href}
+    onClick={onClick}
+    className="text-lg font-medium transition-colors hover:text-primary py-2"
+  >
+    {label}
+  </Link>
+))
+
+MobileNavLink.displayName = 'MobileNavLink'
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/streams", label: "Career Streams" },
-    { href: "/salary-insights", label: "Salary Insights" },
-    { href: "/colleges", label: "Find Colleges" },
-    { href: "/contact", label: "Contact" },
-  ]
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,13 +55,7 @@ export default function Navigation() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              {link.label}
-            </Link>
+            <NavLink key={link.href} href={link.href} label={link.label} />
           ))}
           <Button size="sm" className="ml-4">Get Started</Button>
         </div>
@@ -51,14 +70,12 @@ export default function Navigation() {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <div className="flex flex-col space-y-4 mt-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
+                <MobileNavLink 
+                  key={link.href} 
+                  href={link.href} 
+                  label={link.label}
                   onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium transition-colors hover:text-primary py-2"
-                >
-                  {link.label}
-                </Link>
+                />
               ))}
               <Button className="mt-4">Get Started</Button>
             </div>
