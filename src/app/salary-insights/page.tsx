@@ -28,7 +28,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
 
 interface Career {
   id: number
@@ -195,7 +195,7 @@ export default function SalaryInsightsPage() {
           </Card>
         </div>
 
-        {/* Chart Section */}
+        {/* Chart Section - Simplified for now */}
         <Card className="mb-12 max-w-5xl mx-auto">
           <CardHeader>
             <CardTitle>Top Paying Careers</CardTitle>
@@ -207,17 +207,21 @@ export default function SalaryInsightsPage() {
             {loading ? (
               <Skeleton className="h-[300px] w-full" />
             ) : topCareersChart.length > 0 ? (
-              <ChartContainer config={chartConfig} className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topCareersChart}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis tickFormatter={(value) => `₹${value}L`} />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="salary" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </ChartContainer>
+              <div className="h-[300px] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-sm text-muted-foreground mb-4">
+                    Chart visualization temporarily unavailable
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                    {topCareersChart.slice(0, 4).map((career, index) => (
+                      <div key={index} className="text-center p-3 bg-muted rounded-lg">
+                        <div className="font-medium text-sm">{career.name}</div>
+                        <div className="text-lg font-bold text-primary">₹{career.salary}L</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className="h-[300px] flex items-center justify-center text-muted-foreground">
                 No data available

@@ -19,8 +19,8 @@ const mockStreams = [
     pros: ["High salary potential", "Diverse career options", "Innovation opportunities"],
     cons: ["Competitive field", "Continuous learning required"],
     successStories: [],
-    createdAt: "2024-01-01",
-    updatedAt: "2024-01-01"
+    createdAt: "2024-01-01T00:00:00.000Z",
+    updatedAt: "2024-01-01T00:00:00.000Z"
   },
   {
     id: 2,
@@ -38,8 +38,8 @@ const mockStreams = [
     pros: ["Job security", "Social impact", "Respected profession"],
     cons: ["Long study period", "High stress", "Continuous learning"],
     successStories: [],
-    createdAt: "2024-01-01",
-    updatedAt: "2024-01-01"
+    createdAt: "2024-01-01T00:00:00.000Z",
+    updatedAt: "2024-01-01T00:00:00.000Z"
   },
   {
     id: 3,
@@ -57,8 +57,8 @@ const mockStreams = [
     pros: ["Diverse opportunities", "Good earning potential", "Business skills"],
     cons: ["Competitive market", "Economic dependency"],
     successStories: [],
-    createdAt: "2024-01-01",
-    updatedAt: "2024-01-01"
+    createdAt: "2024-01-01T00:00:00.000Z",
+    updatedAt: "2024-01-01T00:00:00.000Z"
   },
   {
     id: 4,
@@ -76,8 +76,8 @@ const mockStreams = [
     pros: ["Creative freedom", "Personal fulfillment", "Cultural impact"],
     cons: ["Variable income", "Competitive field"],
     successStories: [],
-    createdAt: "2024-01-01",
-    updatedAt: "2024-01-01"
+    createdAt: "2024-01-01T00:00:00.000Z",
+    updatedAt: "2024-01-01T00:00:00.000Z"
   },
   {
     id: 5,
@@ -95,8 +95,8 @@ const mockStreams = [
     pros: ["Job security", "Social prestige", "Pension benefits"],
     cons: ["Competitive exams", "Political environment"],
     successStories: [],
-    createdAt: "2024-01-01",
-    updatedAt: "2024-01-01"
+    createdAt: "2024-01-01T00:00:00.000Z",
+    updatedAt: "2024-01-01T00:00:00.000Z"
   }
 ];
 
@@ -143,7 +143,7 @@ export const GET = withCache(CACHE_DURATION)(async function(request: NextRequest
       'Cache-Control': 'public, max-age=600, stale-while-revalidate=1200',
       'X-Processing-Time': `${processingTime.toFixed(2)}ms`,
       'X-Cache-Status': globalCache.has('streams_data') ? 'HIT' : 'MISS',
-      'X-Total-Count': streams.length.toString(),
+      'X-Total-Count': Array.isArray(streams) ? streams.length.toString() : '0',
     };
     
     return NextResponse.json(streams, { 
