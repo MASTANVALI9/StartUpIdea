@@ -3,7 +3,6 @@
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, BookOpen, Building2, FileText, TrendingUp, Clock, Users, Target, CheckCircle2, ExternalLink } from "lucide-react"
-import Navigation from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -98,7 +97,6 @@ export default function StreamDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <Navigation />
         <div className="container px-4 py-8 md:py-12 mx-auto max-w-7xl">
           <Skeleton className="h-10 w-32 mb-6" />
           <Skeleton className="h-8 w-48 mb-4" />
@@ -118,7 +116,6 @@ export default function StreamDetailPage() {
   if (error || !stream) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="container px-4 py-20 text-center">
           <h1 className="text-3xl font-bold mb-4">{error || 'Stream Not Found'}</h1>
           <p className="text-muted-foreground mb-6">
@@ -148,7 +145,6 @@ export default function StreamDetailPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <Navigation />
       
       <div className="container px-4 py-8 md:py-12 mx-auto max-w-7xl">
         {/* Back Button */}

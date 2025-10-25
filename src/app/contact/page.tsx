@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Send, Mail, Phone, MapPin, Clock, MessageSquare, User, School } from "lucide-react"
-import Navigation from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -100,7 +99,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <Navigation />
       
       <div className="container px-4 py-12 md:py-20 mx-auto">
         {/* Header */}

@@ -12,11 +12,18 @@ const eslintConfig = [
   }),
   {
     rules: {
-      'react/no-unescaped-entities': 'off',
-      '@next/next/no-img-element': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      'react-hooks/exhaustive-deps': 'off',
+      // React rules - Keep minimal for flexibility
+      'react/no-unescaped-entities': 'warn',
+      '@next/next/no-img-element': 'warn',
+
+      // TypeScript rules - Enable for production quality
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+
+      // React Hooks - Enable for proper dependency management
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // Import rules - Keep strict for clean imports
       'import/no-unresolved': 'error',
       'import/named': 'error',
       'import/default': 'error',
@@ -24,8 +31,14 @@ const eslintConfig = [
       'import/no-absolute-path': 'error',
       'import/no-dynamic-require': 'error',
       'import/no-self-import': 'error',
-      'import/no-cycle': 'error',
+      'import/no-cycle': 'warn',
       'import/no-useless-path-segments': 'error',
+
+      // Additional production-ready rules
+      'no-console': 'warn',
+      'no-debugger': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
     },
   },
 ]

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Search, TrendingUp, BookOpen, Users, ArrowRight, Sparkles } from "lucide-react"
-import Navigation from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -44,7 +43,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <Navigation />
       
       {/* Hero Section */}
       <section className="container px-4 py-20 md:py-32 mx-auto">

@@ -7,14 +7,6 @@ const nextConfig: NextConfig = {
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
   },
   
   // Image optimization
@@ -64,10 +56,6 @@ const nextConfig: NextConfig = {
         },
       },
     };
-    
-    // Tree shaking
-    config.optimization.usedExports = true;
-    config.optimization.sideEffects = false;
     
     // Production optimizations
     if (!dev) {
@@ -123,16 +111,19 @@ const nextConfig: NextConfig = {
   
   // Output optimization
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
+
+  // Docker deployment optimization
+  output: 'standalone',
   
-  // Build optimizations
+  // Build optimizations - Production ready settings
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
-  
-  // Turbopack optimizations
+
+  // Turbopack optimizations (moved from experimental)
   turbopack: {
     rules: {
       "*.{jsx,tsx}": {
@@ -140,15 +131,12 @@ const nextConfig: NextConfig = {
       }
     }
   },
-  
-  // PoweredByHeader
+
+  // Security headers
   poweredByHeader: false,
-  
-  // React strict mode
+
+  // React strict mode - Enable for production
   reactStrictMode: true,
-  
-  // SWC minification
-  swcMinify: true,
 };
 
 export default nextConfig;

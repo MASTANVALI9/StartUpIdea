@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Career Navigator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .features {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .feature {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        .feature h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .feature p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📱</div>
+        <h1>You're Offline</h1>
+        <p>Don't worry! You can still explore career guidance content that was previously loaded.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>📚 Browse Career Streams</h3>
+                <p>Explore engineering, medical, commerce, arts, and government job options</p>
+            </div>
+            <div class="feature">
+                <h3>🌟 Read Success Stories</h3>
+                <p>Get inspired by role models and their journey to success</p>
+            </div>
+            <div class="feature">
+                <h3>💰 Check Salary Insights</h3>
+                <p>View salary ranges and career growth information</p>
+            </div>
+        </div>
+        
+        <a href="/" class="button">Go to Homepage</a>
+        
+        <script>
+            // Check if we're back online
+            window.addEventListener('online', function() {
+                window.location.reload();
+            });
+            
+            // Try to reconnect every 30 seconds
+            setInterval(function() {
+                if (navigator.onLine) {
+                    window.location.reload();
+                }
+            }, 30000);
+        </script>
+    </div>
+</body>
+</html>
+

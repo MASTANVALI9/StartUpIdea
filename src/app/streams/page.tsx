@@ -3,14 +3,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Microscope, Calculator, Palette, Wrench, Briefcase, Award, ArrowRight, Users, Clock, TrendingUp } from "lucide-react"
-import Navigation from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useEffect, useState, memo, useMemo } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { getFeaturedRoleModel } from "@/db/seeds/role-models"
-import RoleModelCard from "@/components/RoleModelCard"
+// import RoleModelCard from "@/components/RoleModelCard"
 
 const iconMap: Record<string, any> = {
   FlaskConical: Microscope,
@@ -38,7 +37,7 @@ interface Stream {
 // Memoized Stream Card Component
 const StreamCard = memo(({ stream }: { stream: Stream }) => {
   const IconComponent = iconMap[stream.icon] || Microscope
-  const featuredRoleModel = getFeaturedRoleModel(stream.title)
+  // const featuredRoleModel = getFeaturedRoleModel(stream.title)
               
               return (
                 <Card 
@@ -59,7 +58,7 @@ const StreamCard = memo(({ stream }: { stream: Stream }) => {
                     </p>
 
         {/* Featured Role Model */}
-        {featuredRoleModel && (
+        {/* {featuredRoleModel && (
           <div className="mb-6 p-4 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg border border-primary/20">
             <div className="flex items-center space-x-3 mb-2">
               <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted">
@@ -88,7 +87,7 @@ const StreamCard = memo(({ stream }: { stream: Stream }) => {
             </div>
             <p className="text-xs text-muted-foreground italic">"{featuredRoleModel.quote}"</p>
           </div>
-        )}
+        )} */}
 
                     {/* Quick Stats */}
                     <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-muted/50 rounded-lg">
@@ -199,7 +198,6 @@ export default function StreamsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <Navigation />
       
       <div className="container px-4 py-12 md:py-20 mx-auto">
         {/* Header */}

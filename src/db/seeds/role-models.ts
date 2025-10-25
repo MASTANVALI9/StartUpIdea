@@ -18,7 +18,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "sundar-pichai",
     name: "Sundar Pichai",
-    image: "https://picsum.photos/200/200?random=1",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzNiODJmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPkFQSTwvdGV4dD48L3N2Zz4=",
     currentPosition: "CEO of Google & Alphabet",
     achievement: "Led Google's transformation and became CEO of one of the world's most valuable companies",
     education: "B.Tech Metallurgical Engineering, IIT Kharagpur; MS & MBA Stanford",
@@ -38,7 +38,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "kalpana-chawla",
     name: "Kalpana Chawla",
-    image: "https://picsum.photos/200/200?random=2",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VjNDk0OSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPktDPC90ZXh0Pjwvc3ZnPg==",
     currentPosition: "NASA Astronaut (First Indian woman in space)",
     achievement: "First Indian woman to go to space, inspiring millions of girls to pursue STEM",
     education: "B.E. Aeronautical Engineering, Punjab Engineering College; MS & PhD Aerospace Engineering",
@@ -58,7 +58,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "elon-musk",
     name: "Elon Musk",
-    image: "https://picsum.photos/200/200?random=3",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPkVNPC90ZXh0Pjwvc3ZnPg==",
     currentPosition: "CEO of Tesla & SpaceX",
     achievement: "Revolutionizing electric vehicles and space exploration",
     education: "Physics & Economics, University of Pennsylvania",
@@ -80,7 +80,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "apj-abdul-kalam",
     name: "Dr. APJ Abdul Kalam",
-    image: "https://picsum.photos/200/200?random=4",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzhmNWFmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPkFSSzwvdGV4dD48L3N2Zz4=",
     currentPosition: "Former President of India & Missile Man",
     achievement: "Led India's missile program and became the People's President",
     education: "Aerospace Engineering, Madras Institute of Technology",
@@ -100,7 +100,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "devi-shetty",
     name: "Dr. Devi Shetty",
-    image: "https://picsum.photos/200/200?random=5",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzg4YzM0YyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPkRTPC90ZXh0Pjwvc3ZnPg==",
     currentPosition: "Founder & Chairman, Narayana Health",
     achievement: "Made heart surgery affordable for millions through innovative healthcare model",
     education: "MBBS, Kasturba Medical College; MS General Surgery",
@@ -120,7 +120,7 @@ export const roleModels: RoleModel[] = [
   {
     id: "florence-nightingale",
     name: "Florence Nightingale",
-    image: "https://picsum.photos/200/200?random=6",
+    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y1OWUwMiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTQiPkZOPC90ZXh0Pjwvc3ZnPg==",
     currentPosition: "Founder of Modern Nursing",
     achievement: "Revolutionized healthcare and founded modern nursing profession",
     education: "Self-taught in nursing and statistics",

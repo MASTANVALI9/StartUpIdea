@@ -23,6 +23,8 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
   const [swRegistration, setSwRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Check if app is installed
     const checkInstalled = () => {
       const isStandalone = window.matchMedia('(display-mode: standalone)').matches;

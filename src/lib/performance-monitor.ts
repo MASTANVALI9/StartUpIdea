@@ -1,4 +1,7 @@
 // src/lib/performance-monitor.ts - Advanced performance monitoring
+import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
+
 interface PerformanceMetrics {
   loadTime: number;
   firstContentfulPaint: number;
@@ -25,7 +28,9 @@ class PerformanceMonitor {
   private observers: PerformanceObserver[] = [];
 
   constructor() {
-    this.initializeMonitoring();
+    if (typeof window !== 'undefined') {
+      this.initializeMonitoring();
+    }
   }
 
   private initializeMonitoring() {
@@ -43,6 +48,8 @@ class PerformanceMonitor {
   }
 
   private observeWebVitals() {
+    if (typeof window === 'undefined') return;
+
     // First Contentful Paint
     const fcpObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
@@ -88,6 +95,8 @@ class PerformanceMonitor {
   }
 
   private observeAPIPerformance() {
+    if (typeof window === 'undefined') return;
+
     const originalFetch = window.fetch;
     window.fetch = async (...args) => {
       const startTime = performance.now();
@@ -106,6 +115,8 @@ class PerformanceMonitor {
   }
 
   private observeBundleSize() {
+    if (typeof window === 'undefined') return;
+
     // Monitor bundle size through performance entries
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
@@ -120,6 +131,8 @@ class PerformanceMonitor {
   }
 
   private observeMemoryUsage() {
+    if (typeof window === 'undefined') return;
+
     if ('memory' in performance) {
       const memory = (performance as any).memory;
       setInterval(() => {
@@ -139,6 +152,8 @@ class PerformanceMonitor {
 
   // Measure component render time
   measureRenderTime(componentName: string, renderFn: () => void) {
+    if (typeof window === 'undefined') return 0;
+
     const startTime = performance.now();
     renderFn();
     const endTime = performance.now();
@@ -157,6 +172,8 @@ class PerformanceMonitor {
     functionName: string
   ): T {
     return ((...args: Parameters<T>) => {
+      if (typeof window === 'undefined') return fn(...args);
+
       const startTime = performance.now();
       const result = fn(...args);
       const endTime = performance.now();
@@ -202,6 +219,8 @@ export function usePerformanceMonitor(componentName: string) {
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
   
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const updateMetrics = () => {
       setMetrics(performanceMonitor.getMetrics());
     };
@@ -257,6 +276,8 @@ export const performanceUtils = {
   
   // Preload critical resources
   preloadResource(href: string, as: string = 'script') {
+    if (typeof window === 'undefined') return;
+    
     const link = document.createElement('link');
     link.rel = 'preload';
     link.href = href;
@@ -266,6 +287,8 @@ export const performanceUtils = {
   
   // Prefetch next page
   prefetchPage(href: string) {
+    if (typeof window === 'undefined') return;
+    
     const link = document.createElement('link');
     link.rel = 'prefetch';
     link.href = href;

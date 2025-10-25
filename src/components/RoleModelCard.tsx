@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ChevronDown, ChevronUp, Quote, Star, Clock, GraduationCap } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 export interface RoleModel {
   id: string;
@@ -31,7 +30,7 @@ interface RoleModelCardProps {
 
 // Memoized compact card for performance
 const CompactRoleModelCard = memo(({ roleModel, className }: RoleModelCardProps) => (
-  <Card className={cn("group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/50", className)}>
+  <Card className={`group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/50 ${className || ''}`}>
     <CardHeader className="pb-3">
       <div className="flex items-center space-x-3">
         <div className="relative h-12 w-12 rounded-full overflow-hidden bg-muted">
@@ -81,7 +80,7 @@ const DetailedRoleModelCard = memo(({ roleModel, className }: RoleModelCardProps
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <Card className={cn("group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50", className)}>
+    <Card className={`group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50 ${className || ''}`}>
       <CardHeader className="pb-4">
         <div className="flex items-start space-x-4">
           <div className="relative h-16 w-16 rounded-full overflow-hidden bg-muted flex-shrink-0">

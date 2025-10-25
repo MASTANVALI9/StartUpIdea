@@ -3,7 +3,6 @@
 import { useState, useMemo, memo } from "react"
 import Link from "next/link"
 import { Search, Filter, Star, Users, Clock, GraduationCap, Quote } from "lucide-react"
-import Navigation from "@/components/Navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -155,7 +154,6 @@ export default function InspirationPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <Navigation />
       
       <div className="container px-4 py-12 md:py-20 mx-auto">
         {/* Header */}
