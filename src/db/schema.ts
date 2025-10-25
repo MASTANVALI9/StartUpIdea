@@ -83,6 +83,7 @@ export const streams = sqliteTable('streams', {
   skills: text('skills', { mode: 'json' }).notNull(),
   pros: text('pros', { mode: 'json' }).notNull(),
   cons: text('cons', { mode: 'json' }).notNull(),
+  successStories: text('success_stories', { mode: 'json' }).notNull().$defaultFn(() => []),
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at').notNull(),
 });
@@ -144,6 +145,7 @@ export const careers = sqliteTable('careers', {
   jobType: text('job_type').notNull(),
   demand: text('demand').notNull(),
   growthRate: text('growth_rate').notNull(),
+  roleModels: text('role_models', { mode: 'json' }).notNull().$defaultFn(() => []),
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at').notNull(),
 });

@@ -1,35 +1,138 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/db';
-import { careers } from '@/db/schema';
-import { eq, like, and, desc, asc } from 'drizzle-orm';
+
+// Mock careers data for development
+const mockCareers = [
+  {
+    id: 1,
+    career: "Software Engineer",
+    qualification: "B.Tech Computer Science",
+    stream: "Engineering",
+    avgSalary: "₹8-15 LPA",
+    salaryNumeric: 1200000,
+    jobType: "Full-time",
+    demand: "Very High",
+    growthRate: "25%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 2,
+    career: "Doctor",
+    qualification: "MBBS",
+    stream: "Medical",
+    avgSalary: "₹6-20 LPA",
+    salaryNumeric: 1500000,
+    jobType: "Full-time",
+    demand: "Very High",
+    growthRate: "15%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 3,
+    career: "Chartered Accountant",
+    qualification: "CA",
+    stream: "Commerce",
+    avgSalary: "₹5-12 LPA",
+    salaryNumeric: 1000000,
+    jobType: "Full-time",
+    demand: "High",
+    growthRate: "20%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 4,
+    career: "Civil Engineer",
+    qualification: "B.Tech Civil Engineering",
+    stream: "Engineering",
+    avgSalary: "₹6-12 LPA",
+    salaryNumeric: 900000,
+    jobType: "Full-time",
+    demand: "High",
+    growthRate: "18%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 5,
+    career: "Nurse",
+    qualification: "B.Sc Nursing",
+    stream: "Medical",
+    avgSalary: "₹3-8 LPA",
+    salaryNumeric: 600000,
+    jobType: "Full-time",
+    demand: "Very High",
+    growthRate: "22%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 6,
+    career: "Business Analyst",
+    qualification: "MBA",
+    stream: "Commerce",
+    avgSalary: "₹7-15 LPA",
+    salaryNumeric: 1100000,
+    jobType: "Full-time",
+    demand: "High",
+    growthRate: "20%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 7,
+    career: "Graphic Designer",
+    qualification: "B.Des Graphic Design",
+    stream: "Arts",
+    avgSalary: "₹3-8 LPA",
+    salaryNumeric: 550000,
+    jobType: "Full-time",
+    demand: "Medium",
+    growthRate: "15%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  },
+  {
+    id: 8,
+    career: "IAS Officer",
+    qualification: "Any Graduate + UPSC",
+    stream: "Government Jobs",
+    avgSalary: "₹8-20 LPA",
+    salaryNumeric: 1400000,
+    jobType: "Full-time",
+    demand: "Very High",
+    growthRate: "10%",
+    roleModels: [],
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01"
+  }
+];
 
 // Cache careers data for 5 minutes
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let cachedCareers: any[] | null = null;
 let cacheTimestamp: number = 0;
-let cacheKey: string = '';
 
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    
-    // Get pagination parameters
-    const limit = Math.min(parseInt(searchParams.get('limit') || '50'), 100);
+    const { searchParams } = new URL(request.url);
+    const search = searchParams.get('search') || '';
+    const stream = searchParams.get('stream') || '';
+    const limit = parseInt(searchParams.get('limit') || '50');
     const offset = parseInt(searchParams.get('offset') || '0');
-    
-    // Get filter parameters
-    const stream = searchParams.get('stream');
-    const demand = searchParams.get('demand');
-    const search = searchParams.get('search');
-    const sort = searchParams.get('sort') || 'salary';
-    
-    // Create cache key based on parameters
-    const currentCacheKey = `${stream || 'all'}-${demand || 'all'}-${search || 'all'}-${sort}-${limit}-${offset}`;
     
     const now = Date.now();
     
-    // Return cached data if still valid and same parameters
-    if (cachedCareers && cacheKey === currentCacheKey && (now - cacheTimestamp) < CACHE_DURATION) {
+    // Return cached data if still valid
+    if (cachedCareers && (now - cacheTimestamp) < CACHE_DURATION) {
       return NextResponse.json(cachedCareers, { 
         status: 200,
         headers: {
@@ -38,47 +141,31 @@ export async function GET(request: NextRequest) {
         }
       });
     }
-    
-    // Build query dynamically
-    let query = db.select().from(careers);
-    
-    // Build filter conditions
-    const conditions = [];
-    
-    if (stream) {
-      conditions.push(eq(careers.stream, stream));
-    }
-    
-    if (demand) {
-      conditions.push(eq(careers.demand, demand));
-    }
+
+    // Filter careers based on search and stream
+    let filteredCareers = mockCareers;
     
     if (search) {
-      conditions.push(like(careers.career, `%${search}%`));
+      filteredCareers = filteredCareers.filter(career => 
+        career.career.toLowerCase().includes(search.toLowerCase()) ||
+        career.qualification.toLowerCase().includes(search.toLowerCase())
+      );
     }
     
-    // Apply filters if any exist
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+    if (stream) {
+      filteredCareers = filteredCareers.filter(career => 
+        career.stream.toLowerCase() === stream.toLowerCase()
+      );
     }
-    
-    // Apply sorting
-    if (sort === 'name') {
-      query = query.orderBy(asc(careers.career));
-    } else {
-      // Default to salary sorting (descending)
-      query = query.orderBy(desc(careers.salaryNumeric));
-    }
-    
+
     // Apply pagination
-    const results = await query.limit(limit).offset(offset);
-    
+    const paginatedCareers = filteredCareers.slice(offset, offset + limit);
+
     // Update cache
-    cachedCareers = results;
+    cachedCareers = paginatedCareers;
     cacheTimestamp = now;
-    cacheKey = currentCacheKey;
-    
-    return NextResponse.json(results, { 
+
+    return NextResponse.json(paginatedCareers, { 
       status: 200,
       headers: {
         'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',

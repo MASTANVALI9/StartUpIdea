@@ -29,6 +29,12 @@ export default function Home() {
       title: "Find Local Colleges",
       description: "Search colleges in your district with course details and admission info",
       link: "/colleges"
+    },
+    {
+      icon: Sparkles,
+      title: "Success Stories",
+      description: "Get inspired by real people who achieved their dreams. Find your role model!",
+      link: "/inspiration"
     }
   ]
 
@@ -116,7 +122,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <Card key={index} className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
               <CardHeader>
